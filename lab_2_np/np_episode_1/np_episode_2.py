@@ -11,17 +11,19 @@ for j in range(3):
     k = 255 / (b - a)
     p = (255 - k * (a + b)) / 2
     
-    rows = data.shape[0]
-    columns = data.shape[1]
+    # rows = data.shape[0]
+    # columns = data.shape[1]
     
-    updated_data = np.empty_like(data, dtype = np.uint8)
+    # updated_data = np.empty_like(data, dtype = np.uint8)
     
     # print(rows)
     # print(columns)
-    for u in range(rows):
-        for i in range(columns):
-            x = data[u][i]
-            updated_data[u][i] = k * x + p    
+    # for u in range(rows):
+    #     for i in range(columns):
+    #         x = data[u][i]
+    #         updated_data[u][i] = k * x + p    
+
+    updated_data = np.clip(k * data.astype(np.float64) + p, 0, 255).astype(np.uint8)
 
     res_img = Image.fromarray(updated_data)
     res_img.save(f'result_images/updated_lunar{j+1}.jpg')
